@@ -327,6 +327,19 @@ class ImportOverlap(optplan.EmOverlap):
     file_name = types.StringType()
     center = optplan.vec3d()
 
+# @optplan.register_node_type()
+# class ImportOverlap(optplan.EmOverlap):
+#     """Represents a imported overlap vector.
+
+#     Attributes:
+#         file_name: .mat file containing the overlap vector.
+#         center: the center coordinate of the overlap, allows for translation
+#             of the overlap to the specified center.
+#     """
+#     type = schema_utils.polymorphic_model_type("overlap.import_field_vector")
+#     file_name = types.StringType()
+#     center = optplan.vec3d()
+
 
 @optplan.register_node_type()
 class PlaneWaveSource(optplan.EmSource):

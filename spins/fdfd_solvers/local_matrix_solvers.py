@@ -105,6 +105,7 @@ class MultiprocessingSolver(LocalMatrixSolver):
         # for details.
         import signal
         original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+        multiprocessing.set_start_method("fork", force=True)
         self.pool = multiprocessing.Pool(num_processes)
         signal.signal(signal.SIGINT, original_sigint_handler)
 
