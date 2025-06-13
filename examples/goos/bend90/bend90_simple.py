@@ -139,7 +139,7 @@ def make_objective(eps: goos.Shape, stage: str, sim_3d: bool):
     return obj, sim
 
 
-def visualize(folder: str, step: int):
+def visualize(folder: str, step: int, save_fig: bool = True):
     """Visualizes result of the optimization.
 
     This is a quick visualization tool to plot the permittivity and electric
@@ -169,6 +169,10 @@ def visualize(folder: str, step: int):
     plt.imshow(field_norm[:, :, field_norm.shape[2] // 2].squeeze())
     plt.colorbar()
     plt.show()
+
+    if save_fig:
+        print(f"Saving figure to {os.path.join(folder, 'step{0}.png'.format(step))}")
+        plt.savefig(os.path.join(folder, "step{0}.png".format(step)))
 
 
 if __name__ == "__main__":
