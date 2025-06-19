@@ -94,11 +94,13 @@ def main(save_folder: str,
 
 def make_objective(eps: goos.Shape, stage: str, sim_3d: bool):
     if sim_3d:
+        print("Using 3D solver")
         sim_z_extent = 2500
         solver_info = maxwell.MaxwellSolver(solver="maxwell_cg",
                                             err_thresh=1e-2)
         pml_thickness = [400] * 6
     else:
+        print("Using 2D direct solver")
         sim_z_extent = 40
         solver_info = maxwell.DirectSolver()
         pml_thickness = [400, 400, 400, 400, 0, 0]
@@ -181,9 +183,10 @@ if __name__ == "__main__":
     parser.add_argument("action", choices=("run", "view"))
     parser.add_argument("save_folder")
     parser.add_argument("--step")
+    parser.add_argument("--sim-3d", action="store_true")
 
     args = parser.parse_args()
     if args.action == "run":
-        main(args.save_folder, visualize=True)
+        main(args.save_folder, visualize=True, sim_3d=args.sim_3d)
     elif args.action == "view":
         visualize(args.save_folder, args.step)
